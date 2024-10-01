@@ -1,32 +1,27 @@
 import os
 from environs import Env
 
+
 env = Env()
 env.read_env()
 
-HOST = env("DB_HOST")
-PORT = env("DB_PORT")
-NAME = env("DB_NAME")
-USER = env("DB_USER")
-PASSWORD = env("DB_PASSWORD")
-DB_DEBUG = env("DB_DEBUG")
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'HOST': HOST,
-        'PORT': PORT,
-        'NAME': NAME,
-        'USER': USER,
-        'PASSWORD': PASSWORD
+        'HOST': env("DB_HOST"),
+        'PORT': env("DB_PORT"),
+        'NAME': env("DB_NAME"),
+        'USER': env("DB_USER"),
+        'PASSWORD': env("DB_PASSWORD")
     }
 }
 
 INSTALLED_APPS = ['datacenter']
 
-SECRET_KEY = 'REPLACE_ME'
+SECRET_KEY = env('SECRET_KEY')
 
-DEBUG = DB_DEBUG
+DEBUG = env("DEBUG")
 
 ROOT_URLCONF = 'project.urls'
 
